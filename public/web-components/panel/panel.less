@@ -1,0 +1,49 @@
+x-panel {
+	display: flex;
+	flex-wrap: wrap;
+	font-size: 1rem;
+
+	// Pseudo elements which can be used to force a new row
+	&::before, &::after {
+		content: "";
+		flex: 0 0 100%;
+		order: -1;
+	}
+
+	&::before {
+		order: 4;
+		order: 10;
+	}
+
+	&-avatar {
+		flex: 0 0 auto;
+		order: 0;
+		padding: 0.7em 0 0.7em 1em;
+	}
+
+	&-title {
+		flex: 1 0 auto;
+		order: 3;
+		padding: 0.7em 1em;
+		align-self: center;
+	}
+
+	&-action {
+		flex: 0 1 auto;
+		order: 5;
+		padding: 0.7em 1em 0.7em 0;
+		align-self: center;
+	}
+
+	&-content {
+		flex: 1 0 100%;
+		order: 7;
+		padding: 1em;
+	}
+
+	&-footer {
+		flex: 1 0 auto;
+		order: 9;
+		padding: 0.7em 1em;
+	}
+}
