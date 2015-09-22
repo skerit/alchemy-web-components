@@ -3,8 +3,6 @@ hawkejs.require('svginjector');
 
 (function() {
 
-	var XSvg;
-
 	function applyToElement(element, src) {
 
 		var svg;
@@ -24,24 +22,18 @@ hawkejs.require('svginjector');
 			// Add it to the x-svg element
 			element.appendChild(svg);
 
-			SVGInjector(svg);
+			SVGInjector(svg, {each: function injected(svg) {
+				// Fix scaling bug
+				//svg.setAttribute('width', '100');
+				//svg.setAttribute('height', '100');
+			}});
 		});
 	}
 
-	XSvg = xtag.register('x-svg', {
-		lifecycle:{
-			attributeChanged: function(key, old_value, new_value){
-				if (key == 'data-src') {
-					applyToElement(this, new_value);
-				}
-			}
-		},
-		accessors: {
-			dataSrc: {
-				attribute: {name: 'data-src'},
-				set: function(src) {
-					applyToElement(this, src);
-				}
+	hawkejs.registerElement('x-svg', {
+		attributeChanged: function onChange(key, old_value, new_value) {
+			if (key == 'data-src') {
+				applyToElement(this, new_value);
 			}
 		}
 	});

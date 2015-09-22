@@ -1,0 +1,154 @@
+/*
+ * Alchemy Button Group element
+ * http://github.com/skerit/alchemy-web-components/
+ *
+ * @author      Jelle De Loecker   <jelle@develry.be>
+ * @since       1.0.0
+ * @version     1.0.0
+ * @copyright   Copyright 2015
+ * @license     MIT
+ */
+x-button-group,
+x-button-dropdown {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+x-button-group {
+	> button,
+	> x-button-dropdown {
+		position: relative;
+
+		// Raise the button to the foreground on hover
+		&:hover,
+		&:focus,
+		&:active,
+		.active {
+			z-index: 20;
+		}
+	}
+}
+
+// Horizontal groups (not vertical)
+x-button-group:not([vertical]) {
+	> button,
+	> x-button-dropdown,
+	> x-button-group {
+		float: left;
+
+		&:first-child {
+			margin-left: 0;
+		}
+
+		// Let the buttons overlap 1 pixel,
+		// so there only seems to be 1 border
+		&+button,
+		&+x-button-dropdown,
+		&+x-button-group {
+			margin-left: -1px;
+		}
+	}
+
+	&[justified] {
+		display: -webkit-flex;
+		display: flex;
+		-webkit-flex-flow: row wrap;
+		flex-flow: row wrap;
+
+		> button,
+		> x-button-group,
+		> x-button-dropdown {
+			-webkit-flex: 1 0 auto;
+			flex: 1 0 auto;
+		}
+	}
+}
+
+// Vertical groups
+x-button-group[vertical] {
+
+	> button,
+	> x-button-dropdown,
+	> x-button-group {
+		display: block;
+		float: none;
+		width: 100%;
+		max-width: 100%;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		// Let the buttons overlap 1 pixel,
+		// so there only seems to be 1 border
+		&+button,
+		&+x-button-dropdown,
+		&+x-button-group {
+			margin-top: -1px;
+		}
+	}
+}
+
+x-button-dropdown {
+
+	&[split] {
+		display: -webkit-flex;
+		display: flex;
+
+		>button:hover {
+			z-index: 20;
+		}
+
+		>button:first-child {
+			-webkit-flex: 1;
+			flex: 1;
+		}
+
+		.x-dropdown-toggle {
+			float: right;
+			margin-left: -1px;
+		}
+	}
+
+	.x-dropdown-default {
+		width: 100%;
+	}
+
+	.x-dropdown-default,
+	.x-dropdown-toggle {
+		&:active,
+		&:focus {
+			&+.x-dropdown-wrapper {
+				display: block;
+			}
+		}
+	}
+
+	.x-dropdown-wrapper {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		z-index: 1000;
+		display: none;
+		float: left;
+		min-width: 160px;
+		padding: 5px 0;
+		margin: 2px 0 0;
+		font-size: 14px;
+		text-align: left;
+		list-style: none;
+		background-color: #fff;
+		-webkit-background-clip: padding-box;
+		background-clip: padding-box;
+		border: 1px solid #ccc;
+		border: 1px solid rgba(0,0,0,.15);
+		border-radius: 4px;
+		-webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+		box-shadow: 0 6px 12px rgba(0,0,0,.175);
+
+		&:active {
+			display: block;
+		}
+	}
+}

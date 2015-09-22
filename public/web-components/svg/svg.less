@@ -1,5 +1,8 @@
 x-svg {
-	display: inline-block;
+	// -webkit prefix is still needed:
+	// internal Google crawlers still use old webkit versions
+	display: -webkit-inline-flex;
+	display: inline-flex;
 
 	svg {
 		width: 100%;

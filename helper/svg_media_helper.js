@@ -15,7 +15,8 @@ module.exports = function HawkejsMedia(Hawkejs, Blast) {
 		 */
 		Media.setMethod(function svg(src, options) {
 
-			var url;
+			var className,
+			    url;
 
 			if (!options) {
 				options = {};
@@ -32,7 +33,15 @@ module.exports = function HawkejsMedia(Hawkejs, Blast) {
 				url = this.parseURL('/media/static/' + src);
 			}
 
-			this.print('<x-svg class="' + (options.class || options.className || '') + '" data-src="' + url + '"></x-svg>');
+			if (options['class']) {
+				className = options['class'];
+			} else if (options.className) {
+				className = options.className;
+			} else {
+				className = 'svg-' + String(url).afterLast('/').slice(0, -4);
+			}
+
+			return '<x-svg class="' + className + '" data-src="' + url + '"></x-svg>';
 		});
 	});
 };

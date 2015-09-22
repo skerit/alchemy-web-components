@@ -1,0 +1,66 @@
+x-switch {
+	// Disable selecting the switch
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	font-size: 1rem;
+
+	&, .x-switch-label {
+		display: inline-flex;
+	}
+
+	// Allow selecting text in the label
+	.x-switch-text {
+		-webkit-touch-callout: initial;
+		-webkit-user-select: initial;
+		-khtml-user-select: initial;
+		-moz-user-select: initial;
+		-ms-user-select: initial;
+		user-select: initial;
+	}
+
+	.x-switch-checkbox {
+		position: absolute;
+		opacity: 0;
+	}
+
+	.x-switch-span {
+		position: relative;
+		display: inline-block;
+		transition: background-color .4s;
+		border-radius: 2em;
+		background-color: red;
+		width: 2.6em;
+		height: 1.5em;
+
+		&:after {
+			position: absolute;
+			content: '';
+			top: 0.15em;
+			bottom: 0.15em;
+			left: 0.15em;
+			width: 1.15em;
+			background-color: #fff;
+			border-radius: 50%;
+			-webkit-box-shadow: 0.07em 0 0.21em rgba(0,0,0,0.1);
+			box-shadow: 0.07em 0 0.21em rgba(0,0,0,0.1);
+			-webkit-transition: -webkit-transform .15s ease-out;
+			transition: transform .15s ease-out;
+		}
+	}
+
+	.x-switch-checkbox:checked+.x-switch-span {
+		background-color: green;
+
+		&:after {
+			-webkit-box-shadow: -0.15em 0 0.21em rgba(0,0,0,0.2);
+			box-shadow: -0.15em 0 0.21em rgba(0,0,0,0.2);
+			-webkit-transform: translateX(1.15em);
+			-ms-transform: translateX(1.15em);
+			transform: translateX(1.15em);
+		}
+	}
+}
