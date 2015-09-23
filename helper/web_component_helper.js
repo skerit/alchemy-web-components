@@ -14,7 +14,7 @@ module.exports = function HawkejsWebComponent(Hawkejs, Blast) {
 	 * @param    {String}   name
 	 */
 	WC.setMethod(function load(name) {
-		this.view.script(['mutation_observer', 'x-tag/core', 'x-tag/custom-elements', '/public/web-components/' + name + '/' + name + '.js']);
+		this.view.script(['/public/web-components/' + name + '/' + name + '.js']);
 		this.view.style('web-components/' + name + '/' + name);
 	});
 

@@ -1,17 +1,5 @@
 (function() {
 
-	var template,
-	    XSwitch,
-	    proto,
-	    html;
-
-	html = '<label class="x-switch-label">'
-	     + '<input type="checkbox" class="x-switch-checkbox"></input>'
-	     + '<span class="x-switch-span"></span>'
-	     + '</label>';
-
-	template = __Protoblast.parseHTML(html);
-
 	/*
 	 * The x-button-group element
 	 *
@@ -47,7 +35,6 @@
 				// Add the "selected" class to this button
 				button.classList.add('selected');
 			});
-			window.bg = this;
 		}, radio: {
 			attribute: true
 		}, value: {
@@ -73,7 +60,8 @@
 	});
 
 	var db_template = __Protoblast.parseHTML('<button class="x-dropdown-default">Dropdown</button>'),
-	    dw_template = __Protoblast.parseHTML('<x-button-group class="x-dropdown-wrapper" vertical></x-button-group>');
+	    dw_template = __Protoblast.parseHTML('<x-button-group class="x-dropdown-wrapper" vertical></x-button-group>'),
+	    split_template = __Protoblast.parseHTML('<button class="x-dropdown-toggle">&#x25BE;</button>');
 
 	/*
 	 * The x-button-dropdown element
@@ -89,18 +77,31 @@
 			    toggle_button,
 			    dropdown_wrapper,
 			    last_button = null,
-			    is_split = true,
+			    is_split,
 			    button,
+			    temp,
 			    li,
 			    i;
+
+			// Is this a split dropdown?
+			is_split = this.hasAttribute('split');
 
 			// Look for the toggle button
 			toggle_button = this.getElementsByClassName('x-dropdown-toggle')[0];
 
 			// If there is no toggle button, look for a default one
 			if (!toggle_button) {
-				is_split = false;
-				toggle_button = this.getElementsByClassName('x-dropdown-default')[0];
+				if (is_split) {
+					// Clone the toggle button template with a caret
+					toggle_button = split_template.cloneNode(true);
+
+					// Get the element where we want to insert it
+					temp = this.children[1];
+
+					this.insertBefore(toggle_button, temp || null);
+				} else {
+					toggle_button = this.getElementsByClassName('x-dropdown-default')[0];
+				}
 			}
 
 			if (!toggle_button) {
@@ -136,8 +137,6 @@
 
 				last_button = button;
 			}
-
-			window.bd = this;
 		}, radio: {
 			attribute: true
 		}, value: {
