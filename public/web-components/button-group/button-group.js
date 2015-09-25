@@ -7,7 +7,7 @@
 	 * @since       1.0.0
 	 * @version     1.0.0
 	 */
-	hawkejs.registerElement('x-button-group', {
+	var ButtonGroup = hawkejs.registerElement('x-button-group', {
 		createdCallback: function created() {
 
 			var that = this;
@@ -16,6 +16,7 @@
 			this.addEventListener('click', function onClick(e) {
 
 				var all_buttons,
+				    new_event,
 				    button,
 				    i;
 
@@ -34,6 +35,14 @@
 
 				// Add the "selected" class to this button
 				button.classList.add('selected');
+
+				// Create a new event
+				new_event = document.createEvent('Event');
+
+				// The event name is 'change'
+				new_event.initEvent('change', true, true);
+
+				that.dispatchEvent(new_event);
 			});
 		}, radio: {
 			attribute: true
@@ -60,7 +69,7 @@
 	});
 
 	var db_template = __Protoblast.parseHTML('<button class="x-dropdown-default">Dropdown</button>'),
-	    dw_template = __Protoblast.parseHTML('<x-button-group class="x-dropdown-wrapper" vertical></x-button-group>'),
+	    dw_template = __Protoblast.parseHTML('<x-button-group class="x-dropdown-wrapper" vertical radio></x-button-group>'),
 	    split_template = __Protoblast.parseHTML('<button class="x-dropdown-toggle">&#x25BE;</button>');
 
 	/*
@@ -76,6 +85,7 @@
 			var that = this,
 			    toggle_button,
 			    dropdown_wrapper,
+			    default_button,
 			    last_button = null,
 			    is_split,
 			    button,
@@ -95,6 +105,13 @@
 					// Clone the toggle button template with a caret
 					toggle_button = split_template.cloneNode(true);
 
+					// Get the first button
+					default_button = this.children[0];
+
+					if (default_button && default_button.className) {
+						toggle_button.className += ' ' + default_button.className;
+					}
+
 					// Get the element where we want to insert it
 					temp = this.children[1];
 
@@ -106,6 +123,7 @@
 
 			if (!toggle_button) {
 				toggle_button = db_template.cloneNode(true);
+				default_button = toggle_button;
 				this.insertBefore(toggle_button, this.firstChild || null);
 			}
 
@@ -137,27 +155,31 @@
 
 				last_button = button;
 			}
+
+			// Listen to the change event on the wrapper
+			dropdown_wrapper.addEventListener('change', function onChange(e) {
+				that.value = this.value;
+			});
+
+			// Now attach the event listener to the default button
+			if (default_button) {
+				default_button.addEventListener('click', function onClick(e) {
+
+					var new_event;
+
+					that.value = this.value;
+
+					// Create a new event
+					new_event = document.createEvent('Event');
+
+					// The event name is 'change'
+					new_event.initEvent('change', true, true);
+
+					that.dispatchEvent(new_event);
+				});
+			}
 		}, radio: {
 			attribute: true
-		}, value: {
-			get: function getValue() {
-
-				var value   = '',
-				    buttons = this.querySelectorAll('button.selected'),
-				    button,
-				    i;
-
-				for (i = 0; i < buttons.length; i++) {
-					button = buttons[i];
-
-					if (button.value) {
-						if (value) value += ',';
-						value += button.value;
-					}
-				}
-
-				return value;
-			}
 		}
 	});
 }());

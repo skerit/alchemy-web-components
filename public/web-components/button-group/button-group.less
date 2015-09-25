@@ -24,7 +24,7 @@ x-button-group {
 		&:hover,
 		&:focus,
 		&:active,
-		.active {
+		&.selected {
 			z-index: 20;
 		}
 	}
@@ -93,8 +93,8 @@ x-button-group[vertical] {
 x-button-dropdown {
 
 	&[split] {
-		display: -webkit-flex;
-		display: flex;
+		display: -webkit-inline-flex;
+		display: inline-flex;
 
 		>button:hover {
 			z-index: 20;
