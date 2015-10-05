@@ -31,6 +31,7 @@ x-panel {
 		padding: 0.7em 0 0.7em 1em;
 	}
 
+	&-tabs,
 	&-title {
 		flex: 1 0 auto;
 		order: 3;
@@ -50,6 +51,14 @@ x-panel {
 		flex: 1 0 100%;
 		order: 7;
 		padding: 1em;
+	}
+
+	&[tabs] {
+		x-panel-body {
+			&:not(.active) {
+				display: none;
+			}
+		}
 	}
 
 	&-footer {

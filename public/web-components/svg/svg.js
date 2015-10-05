@@ -16,6 +16,14 @@ hawkejs.require('svginjector');
 			// Create new element
 			svg = document.createElement('div');
 
+			if (src[0] !== '/' && src.indexOf('http') == -1) {
+				src = '/media/static/' + src;
+			}
+
+			if (src.indexOf('.svg') === -1) {
+				src += '.svg';
+			}
+
 			// Add attribute
 			svg.setAttribute('data-src', src);
 

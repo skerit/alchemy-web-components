@@ -10,7 +10,8 @@
 	var ButtonGroup = hawkejs.registerElement('x-button-group', {
 		createdCallback: function created() {
 
-			var that = this;
+			var that = this,
+			    is_toggle = this.hasAttribute('toggle');
 
 			// Listen to the click event
 			this.addEventListener('click', function onClick(e) {
@@ -18,6 +19,7 @@
 				var all_buttons,
 				    new_event,
 				    button,
+				    state,
 				    i;
 
 				// Get the clicked button
@@ -33,16 +35,30 @@
 					}
 				}
 
-				// Add the "selected" class to this button
-				button.classList.add('selected');
+				if (is_toggle && button.classList.contains('selected')) {
+					button.classList.remove('selected');
+					state = false;
+				} else {
+					// Add the "selected" class to this button
+					button.classList.add('selected');
+					state = true;
+				}
 
-				// Create a new event
-				new_event = document.createEvent('Event');
-
-				// The event name is 'change'
-				new_event.initEvent('change', true, true);
-
+				// Create a new custom event called "change"
+				new_event = new CustomEvent('change');
 				that.dispatchEvent(new_event);
+
+				if (is_toggle) {
+					new_event = new CustomEvent('toggled', {
+						detail: {
+							state: state,
+							button: button,
+							value: button.value
+						}
+					});
+
+					that.dispatchEvent(new_event);
+				}
 			});
 		}, radio: {
 			attribute: true
