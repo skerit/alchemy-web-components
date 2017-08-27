@@ -1,4 +1,4 @@
-x-switch {
+al-switch {
 	// Disable selecting the switch
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -8,12 +8,12 @@ x-switch {
 	user-select: none;
 	font-size: 1rem;
 
-	&, .x-switch-label {
+	&, .al-switch-label {
 		display: inline-flex;
 	}
 
 	// Allow selecting text in the label
-	.x-switch-text {
+	.al-switch-text {
 		-webkit-touch-callout: initial;
 		-webkit-user-select: initial;
 		-khtml-user-select: initial;
@@ -22,12 +22,12 @@ x-switch {
 		user-select: initial;
 	}
 
-	.x-switch-checkbox {
+	.al-switch-checkbox {
 		position: absolute;
 		opacity: 0;
 	}
 
-	.x-switch-span {
+	.al-switch-span {
 		position: relative;
 		display: inline-block;
 		transition: background-color .4s;
@@ -52,7 +52,7 @@ x-switch {
 		}
 	}
 
-	.x-switch-checkbox:checked+.x-switch-span {
+	.al-switch-checkbox:checked+.al-switch-span {
 		background-color: green;
 
 		&:after {

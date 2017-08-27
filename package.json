@@ -1,0 +1,19 @@
+{
+	"name": "alchemy-web-components",
+	"description": "Web components for Alchemymvc",
+	"version": "0.4.0",
+	"author": "Jelle De Loecker <jelle@develry.be>",
+	"keywords": [
+		"alchemy",
+		"alchemymvc",
+		"web-components"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/skerit/alchemy-web-components.git"
+	},
+	"license": "MIT",
+	"engines": {
+		"node": ">=6.6.0"
+	}
+}
