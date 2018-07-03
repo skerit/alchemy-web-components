@@ -1,14 +1,14 @@
 // Require the svginjector
 hawkejs.require('svginjector');
 
-(function() {
+(function registerSVG() {
 
 	function applyToElement(element, src) {
 
 		var svg;
 
 		// Apply svginjector when data-src changes
-		hawkejs.require('svginjector', function() {
+		hawkejs.require('svginjector', function gotSvgInjector() {
 
 			// Clear the element internals
 			element.innerHTML = '';
@@ -36,6 +36,10 @@ hawkejs.require('svginjector');
 				//svg.setAttribute('height', '100');
 			}});
 		});
+	}
+
+	if (hawkejs.constructor.elementHasBeenRegistered('x-svg')) {
+		return;
 	}
 
 	hawkejs.registerElement('x-svg', {

@@ -1,6 +1,6 @@
 module.exports = function HawkejsMedia(Hawkejs, Blast) {
 
-	Blast.on({type: 'extended', descendant: 'MediaHelper'}, function gotMedia(parent, Media) {
+	Blast.on({type: 'extended', descendant: 'Media', namespace: 'Alchemy.Helper'}, function gotMedia(parent, Media) {
 
 		/**
 		 * Output an x-svg element
