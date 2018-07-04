@@ -8,12 +8,15 @@
 		"alchemymvc",
 		"web-components"
 	],
+	"peerDependencies": {
+		"alchemymvc": "~1.0.0"
+	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/skerit/alchemy-web-components.git"
 	},
 	"license": "MIT",
 	"engines": {
-		"node": ">=6.6.0"
+		"node": ">=8.9.0"
 	}
 }
